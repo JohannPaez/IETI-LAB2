@@ -1,14 +1,26 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
-import './components/App.css';
-import {TodoList} from "./components/TodoList";
-import DatePicker from 'react-datepicker';
+import './App.css';
+import {TodoList} from "./TodoList";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from "moment";
-import { Login } from "./components/Login";
+import { Login } from "./Login";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+  } from '@material-ui/pickers';
 
-class App extends Component {
+import 'date-fns';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import Card from '@material-ui/core/Card';
 
+
+class TodoApp extends Component {
+
+    
     constructor(props) {
         super(props);
         this.state = {items: [], text: '', priority: 0, dueDate: moment()};
@@ -21,6 +33,7 @@ class App extends Component {
 
     render() {
 
+        
         return (
             <div className="App">
                 <header className="App-header">
@@ -30,17 +43,19 @@ class App extends Component {
 
                 <br/>
                 <br/>
+                
                 <form onSubmit={this.handleSubmit} className="todo-form">
                     <h3>New TODO</h3>
+                    <Card style = {{ backgroundImage: "linear-gradient(to right, #1e1f22, white)" }}>
                     <label htmlFor="text" className="right-margin">
                         Text:
                     </label>
-
-                    <input
+                    
+                    <TextField
                         id="text"
                         onChange={this.handleTextChange}
                         value={this.state.text}>
-                    </input>
+                    </TextField>
 
                     <br/>
                     <br/>
@@ -48,29 +63,40 @@ class App extends Component {
                         Priority:
                     </label>
 
-                    <input
+                    <TextField
                         id="priority"
                         type="number"
                         onChange={this.handlePriorityChange}
                         value={this.state.priority}>
-                    </input>
+                    </TextField>
                     <br/>
                     <br/>
-
-                    <DatePicker
-                        id="due-date"
-                        selected={this.state.dueDate}
-                        placeholderText="Due date"
-                        onChange={this.handleDateChange}>
-                    </DatePicker>
-                    <br/>
-                    <button>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Grid container justify="space-around">
+                            <KeyboardDatePicker
+                            margin="normal"
+                            id="due-date"
+                            label="Due Date"
+                            format="dd-MM-yyyy"
+                            value = {this.state.dueDate}
+                            onChange={this.handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                            />
+                        </Grid>
+                    </MuiPickersUtilsProvider>                    
+                    <Button
+                        type="submit">
                         Add #{this.state.items.length + 1}
-                    </button>
+                    </Button>
+                    </Card>
                 </form>
                 <br/>
                 <br/>
-                <TodoList todoList={this.state.items}/>
+                
+                    <TodoList todoList={this.state.items}/>
+                             
 
                 <Login></Login>
             </div>
@@ -108,14 +134,16 @@ class App extends Component {
             dueDate: this.state.dueDate,
 
         };
+
+
         this.setState(prevState => ({
             items: prevState.items.concat(newItem),
             text: '',
             priority: '',
-            dueDate: ''
+            dueDate: null
         }));
     }
 
 }
 
-export default App;
+export default TodoApp;
