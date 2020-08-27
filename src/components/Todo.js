@@ -1,22 +1,20 @@
 import React from 'react';
-import DatePicker from "react-datepicker";
+import CardLab from './CardLab'
 
 export class Todo extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        return (
-            <tr>
-                <td>{this.props.text}</td>
-                <td>{this.props.priority}</td>
-                {console.log("duedate---------------------------------------------")}
-                {console.log(this.props.dueDate)}
-                <td>{this.props.dueDate.toString()}</td>
-            </tr>
+        return (       
+            <div>
+                <CardLab 
+                    text = {this.props.text}
+                    priority = {this.props.priority}
+                    dueDate = {this.props.dueDate.toString()}
+                >
+                </CardLab>
+                <br />
+            </div>
         );
     }
-
+    
 }

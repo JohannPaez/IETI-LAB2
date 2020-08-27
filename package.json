@@ -14,7 +14,8 @@
     "date-fns": "latest",
     "@material-ui/pickers": "latest",
     "@material-ui/core": "latest",
-    "@date-io/date-fns": "v1"
+    "@date-io/date-fns": "v1",
+    "react-router-dom": "^4.3.1"
   },
   "scripts": {
     "start": "react-scripts start",

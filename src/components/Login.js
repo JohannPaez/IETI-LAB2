@@ -8,12 +8,24 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import './Login.css'
+import './Login.css';
 
 
-export class Login extends React.Component{
+export default class Login extends React.Component{
+
+    constructor(props) {
+        super(props);   
+        this.handleSubmit = this.handleSubmit.bind(this);  
+        this.handleEmailChange = this.handleEmailChange.bind(this);    
+        this.handlePassChange = this.handlePassChange.bind(this);
+        this.state = {email: '', password: ''};
+        localStorage.setItem('email', 'johann.paez@mail.escuelaing.edu.co');
+        localStorage.setItem('passwd', 'Prueba123@');
+
+    }
 
     render(){
+
         return (
             <React.Fragment>
                 <CssBaseline />
@@ -23,10 +35,10 @@ export class Login extends React.Component{
                             <LockIcon />
                         </Avatar>
                         <Typography variant="h2">Sign in</Typography>
-                        <form className="form">
+                        <form className="form" onSubmit={this.handleSubmit}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
-                                <Input id="email" name="email" autoComplete="email" autoFocus />
+                                <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleEmailChange} />
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="password">Password</InputLabel>
@@ -35,6 +47,7 @@ export class Login extends React.Component{
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    onChange={this.handlePassChange}
                                 />
                             </FormControl>
                             <Button
@@ -52,5 +65,27 @@ export class Login extends React.Component{
             </React.Fragment>
         );
     }
+
+    handleEmailChange(e) {
+        this.setState({
+            email: e.target.value
+        });
+    }
+
+    handlePassChange(e) {
+        this.setState({
+            password: e.target.value
+        });
+    }
+
+    handleSubmit() {            
+        if (this.state.email === localStorage.getItem('email') && this.state.password === localStorage.getItem('passwd')) {            
+            //this.props.isLoggedIn();
+            localStorage.setItem('isLoggedIn', true);
+        } else {
+            alert("Usuario o contraseña incorrectos, intente nuevamente!")
+        }
+    }
+
 
 }

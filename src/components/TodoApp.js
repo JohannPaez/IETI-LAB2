@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {TodoList} from "./TodoList";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from "moment";
-import { Login } from "./Login";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {
@@ -15,10 +13,10 @@ import {
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
-import Card from '@material-ui/core/Card';
 
 
-class TodoApp extends Component {
+
+export default class TodoApp extends Component {
 
     
     constructor(props) {
@@ -32,21 +30,12 @@ class TodoApp extends Component {
 
 
     render() {
-
         
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">TODO React App</h1>
-                </header>
 
-                <br/>
-                <br/>
-                
                 <form onSubmit={this.handleSubmit} className="todo-form">
                     <h3>New TODO</h3>
-                    <Card style = {{ backgroundImage: "linear-gradient(to right, #1e1f22, white)" }}>
                     <label htmlFor="text" className="right-margin">
                         Text:
                     </label>
@@ -76,7 +65,7 @@ class TodoApp extends Component {
                             <KeyboardDatePicker
                             margin="normal"
                             id="due-date"
-                            label="Due Date"
+                            label="Duedate"
                             format="dd-MM-yyyy"
                             value = {this.state.dueDate}
                             onChange={this.handleDateChange}
@@ -90,15 +79,11 @@ class TodoApp extends Component {
                         type="submit">
                         Add #{this.state.items.length + 1}
                     </Button>
-                    </Card>
                 </form>
                 <br/>
                 <br/>
                 
-                    <TodoList todoList={this.state.items}/>
-                             
-
-                <Login></Login>
+                    <TodoList todoList={this.state.items}/>                            
             </div>
         );
     }
@@ -146,4 +131,3 @@ class TodoApp extends Component {
 
 }
 
-export default TodoApp;
