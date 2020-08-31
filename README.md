@@ -7,7 +7,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   
   
   **IMPORTANTE:** Para poder utilizar el aplicativo es necesario instalar las dependencias primero con el comando **npm install**.
-  
+## Datos de Logeo
+**Correo**: johann.paez@mail.escuelaing.edu.co
+
+**Contraseña**: Prueba123@
+
+localStorage.setItem('email', 'johann.paez@mail.escuelaing.edu.co');
+        localStorage.setItem('passwd', 'Prueba123@');
 ## Enunciado
 El enunciado del laboratorio está disponible [aquí](https://github.com/ieti-eci/1.2-react-material).
 
